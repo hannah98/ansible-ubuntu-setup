@@ -1,0 +1,30 @@
+---
+- hosts: all
+  connection: local
+  #vars_files:
+    #- 'vars/vault.yml'
+
+  roles:
+    # grog.package should stay at the top
+    - role: grog.package
+      tags:
+        - apt
+    - role: initial-setup
+    - role: bash-git-prompt
+      tags:
+        - profile
+        - git
+        - bashrc
+    - role: update-script
+      tags:
+        - profile
+    - role: vim
+      tags:
+        - vim
+    - role: my-profile
+      tags:
+        - profile
+    - role: tmux
+      tags:
+        - tmux
+

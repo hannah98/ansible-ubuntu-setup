@@ -1,0 +1,8 @@
+---
+
+- name: install tmux.conf
+  become: no
+  ansible.builtin.template:
+    dest: "~/.tmux.conf"
+    src: tmux.conf
+    mode: '0755'

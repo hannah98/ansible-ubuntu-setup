@@ -1,0 +1,41 @@
+---
+
+- name: Create .vim directory if it does not exist
+  become: no
+  ansible.builtin.file:
+    path: "~/.vim/colors"
+    state: directory
+    mode: '0755'
+
+- stat:
+    path: "~/.vim/colors/solarized.vim"
+  become: no
+  register: solarized_file
+
+- name: Set if solarized installed
+  become: no
+  set_fact:
+    solarized_installed: "{{ solarized_file.stat.exists | default(false) }}"
+
+- name: Checkout solarized theme
+  become: no
+  ansible.builtin.git:
+    repo: 'https://github.com/hannah98/vim-colors-solarized.git'
+    dest: "/tmp/vim-colors-solarized"
+  when: not solarized_installed
+
+- name: copy solarized theme
+  become: no
+  ansible.builtin.copy:
+    remote_src: yes
+    src: "/tmp/vim-colors-solarized/colors/solarized.vim"
+    dest: "~/.vim/colors/solarized.vim"
+    mode: '0644'
+  when: not solarized_installed
+
+- name: Install vimrc
+  become: no
+  ansible.builtin.template:
+    src: vimrc
+    dest: "~/.vimrc"
+    mode: '0644'

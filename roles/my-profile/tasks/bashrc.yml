@@ -1,0 +1,33 @@
+---
+
+- name: ensure bashrc exists
+  become: no
+  ansible.builtin.file:
+    path: "~/.bashrc"
+    state: touch
+    mode: 0600
+
+- name: VI mode
+  become: no
+  lineinfile:
+    dest: "~/.bashrc"
+    line: "set -o vi"
+    create: no
+
+- name: Setup Bash aliases
+  become: no
+  lineinfile:
+    dest: "~/.bashrc"
+    create: no
+    line: "alias {{ item.alias }}='{{ item.command }}'"
+    regexp: "^alias {{ item.alias }}="
+  with_items: '{{bash_aliases}}'
+
+- name: Setup exported variables
+  become: no
+  lineinfile:
+    dest: "~/.bashrc"
+    create: no
+    line: "export {{ item.name }}='{{ item.value }}'"
+    regexp: "^export {{ item.name }}="
+  with_items: '{{bash_exports}}'

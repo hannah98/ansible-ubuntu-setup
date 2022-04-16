@@ -1,0 +1,30 @@
+---
+
+- name: update all packages
+  package:
+    name: '*'
+    state: latest
+
+- name: Check if reboot is needed because kernel was upgraded
+  stat:
+    path: /var/run/reboot-required
+  register: apt_reboot_hint_result
+  when: ansible_os_family == "Debian"
+
+- name: set fact reboot hint false
+  set_fact:
+    reboot_hint_result: false
+  when: ansible_os_family == "Debian" and reboot_default | bool and apt_reboot_hint_result.stat.exists == false # noqa 601
+
+- name: set fact reboot hint true
+  set_fact:
+    reboot_hint_result: true
+  when: ansible_os_family == "Debian" and reboot_default | bool and apt_reboot_hint_result.stat.exists == true # noqa 601
+
+- name: restart server
+  reboot:
+    pre_reboot_delay: "{{ server_update_reboot_pre_reboot_delay }}"
+    post_reboot_delay: "{{ server_update_reboot_post_reboot_delay }}"
+    reboot_timeout: "{{ server_update_reboot_reboot_timeout }}"
+  when: reboot_default | bool and reboot_hint_result | bool and 'noreboot' not in group_names
+

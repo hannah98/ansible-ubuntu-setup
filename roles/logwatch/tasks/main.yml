@@ -1,0 +1,15 @@
+- name: "Create {{ logwatch_conf_dir }}"
+  ansible.builtin.file:
+    path: "{{ logwatch_conf_dir }}"
+    state: directory
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: "Setup {{ logwatch_conf_file }}"
+  ansible.builtin.template:
+    src: logwatch.conf.j2
+    dest: "{{ logwatch_conf_file }}"
+    owner: root
+    group: root
+    mode: '0644'

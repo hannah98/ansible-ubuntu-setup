@@ -1,0 +1,28 @@
+#!/bin/bash
+
+printout () {
+    msg=$1
+    if [ -n $msg ]; then
+        echo
+        echo $msg
+    fi
+    echo
+}
+
+sudo echo
+printout "update"
+sudo apt update
+printout "upgrade"
+sudo apt -y upgrade
+printout "dist-upgrade"
+sudo apt dist-upgrade
+printout "autoclean"
+sudo apt autoclean
+printout "autoremove"
+sudo apt autoremove
+
+printout
+if [ -f /var/run/reboot-required ]; then
+    cat /var/run/reboot-required
+fi
+

@@ -1,0 +1,70 @@
+if &term == "xterm"
+    set term=xterm-256color
+endif
+
+if &term == "screen"
+  set t_Co=256
+endif
+
+"
+"
+"
+" Use Vim settings (versus Vi compatible)
+set nocompatible
+
+"Avoid creating ~backup files
+set nobackup
+
+"Length of command history
+set history=50
+
+"Turn on the ruler at the bottom of the screen (shows current line, etc)
+set ruler
+
+"Show the command in the last line of the screen.
+set showcmd
+
+"Incremental search - live search while typing
+set incsearch
+
+" Override ignorecase if search has upper case characters
+set smartcase
+
+"set hardtabs=4
+"Setting this to a non-zero value other than tabstop will make the tab key (in insert mode) insert a combination of spaces (and possibly tabs) to simulate tab stops at this width.
+set softtabstop=4
+
+"Number of spaces to use for each step of (auto)indent.  Used for |'cindent'|, |>>|, |<<|, etc.
+set shiftwidth=4
+
+"Number of spaces that a <Tab> in the file counts for.
+set tabstop=4
+
+"If a <Tab> is typed, expand it to the appropriate number of spaces, according to 'tabstop'
+set expandtab
+
+"When on, a <Tab> in front of a line inserts blanks according to 'shiftwidth'
+set smarttab
+
+"Turn on word wrapping
+set wrap
+
+set t_Co=256
+syntax on
+" syntax enable
+set background=dark
+colorscheme solarized
+let g:solarized_termcolors=256
+
+filetype indent off
+
+" don't go into visual mode with mouse
+set mouse-=a
+noremap <LeftDrag> <LeftMouse>
+noremap! <LeftDrag> <LeftMouse>
+
+"set paste
+
+set noundofile
+
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab

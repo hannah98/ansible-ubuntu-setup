@@ -1,0 +1,26 @@
+---
+
+- name: Checkout bash-git-prompt
+  ansible.builtin.git:
+    repo: 'https://github.com/magicmonty/bash-git-prompt.git'
+    dest: "~/.bash-git-prompt"
+    version: 2.7.1
+  become: no
+
+- name: Install git-prompt-colors
+  ansible.builtin.template:
+    src: git-prompt-colors.sh
+    dest: "~/.git-prompt-colors.sh"
+    mode: '0644'
+  become: no
+
+- name: Add bash-git-prompt to bashrc
+  blockinfile:
+    path: "~/.bashrc"
+    block: |
+      if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
+          # Custom theme will default to ~/.git-prompt-colors.sh for theme file
+          export GIT_PROMPT_THEME=Custom
+          source $HOME/.bash-git-prompt/gitprompt.sh
+      fi
+  become: no

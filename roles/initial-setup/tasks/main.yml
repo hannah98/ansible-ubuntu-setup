@@ -1,0 +1,37 @@
+---
+
+- name: remove ubuntu motd spam
+  become: true
+  file:
+    path: "/etc/update-motd.d/{{ item }}"
+    state: absent
+  loop:
+    - 80-livepatch
+    - 95-hwe-eol
+    - 10-help-text
+  when: ansible_distribution == 'Ubuntu'
+
+- name: "Ensure the hostname changes are persistent"
+  stat: path=/etc/cloud/cloud.cfg
+  register: cloud_cfg
+- lineinfile:
+    dest: /etc/cloud/cloud.cfg
+    state: present
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - { regexp: '^ - set_hostname', line: '# - set_hostname' }
+    - { regexp: '^ - update_hostname', line: '# - update_hostname' }
+  when: cloud_cfg.stat.exists == True
+
+- name: Set timezone
+  timezone:
+    name: America/Chicago
+
+- name: import keys from github
+  become: no
+  authorized_key:
+    user: "{{ ansible_user | default('bhannah') }}"
+    state: present
+    key: https://github.com/hannah98.keys
+

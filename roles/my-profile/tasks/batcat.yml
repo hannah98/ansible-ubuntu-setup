@@ -1,0 +1,30 @@
+---
+
+- name: ensure bat config dir exists
+  become: no
+  ansible.builtin.file:
+    path: "~/.config/bat/themes"
+    state: directory
+    mode: 0755
+
+- name: Checkout bat solarized theme
+  become: no
+  ansible.builtin.git:
+    repo: 'https://github.com/deplorableword/textmate-solarized.git'
+    dest: "~/.config/bat/themes"
+  register: git_checkout
+
+- name: Build bat cache
+  become: no
+  ansible.builtin.shell: /usr/bin/batcat cache --build
+  register: cache_output
+  when: git_checkout.changed
+
+#- name: link bat to batcat
+  #ansible.builtin.file:
+    #src: /usr/bin/bat
+    #dest: /usr/bin/batcat
+    #owner: root
+    #group: root
+    #state: link
+  #become: true
