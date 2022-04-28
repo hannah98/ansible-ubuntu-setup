@@ -22,6 +22,7 @@ encrypt: ## Encrypt the vault
 
 reqs: ## Install the Galaxy requirements
 	$(GALAXY) install -r requirements.yml
+	$(GALAXY) collection install community.general
 
 forcereqs: ## Install the Galaxy requirements (forced)
 	$(GALAXY) install -r requirements.yml --force

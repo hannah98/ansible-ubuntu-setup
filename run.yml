@@ -27,4 +27,7 @@
     - role: tmux
       tags:
         - tmux
+    - role: gron
+      tags:
+        - gron
 
