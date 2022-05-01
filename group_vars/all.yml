@@ -29,6 +29,7 @@ package_list:
   - name: curl
   - name: git
   - name: htop
+  - name: python3-pip
   - name: sudo
   - name: tmux
   - name: vim
