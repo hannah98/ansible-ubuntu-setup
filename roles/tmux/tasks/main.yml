@@ -6,3 +6,17 @@
     dest: "~/.tmux.conf"
     src: tmux.conf
     mode: '0755'
+
+- name: ensure local bin dir exists
+  become: no
+  ansible.builtin.file:
+    path: "~/.local/bin"
+    state: directory
+    mode: 0755
+
+- name: install strt.sh
+  become: no
+  ansible.builtin.template:
+    dest: "~/.local/bin/strt.sh"
+    src: strt.sh
+    mode: '0755'

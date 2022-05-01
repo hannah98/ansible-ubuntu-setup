@@ -16,6 +16,7 @@ bash_aliases:
   - { alias: "pp", command: "ps -fu${USER} |grep -v \"ps -fu${USER}\""}
   - { alias: "pu", command: "ps -fu $1"}
   - { alias: "reperl", command: "perl -de0"}
+  - { alias: "strt", command: "~/.local/bin/strt.sh"}
 
 # my-profile role
 bash_exports:
