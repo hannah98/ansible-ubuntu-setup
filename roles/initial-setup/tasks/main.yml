@@ -35,3 +35,6 @@
     state: present
     key: https://github.com/hannah98.keys
 
+- name: Install github3.py python package
+  pip:
+    name: github3.py
