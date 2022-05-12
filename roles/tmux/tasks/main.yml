@@ -20,3 +20,18 @@
     dest: "~/.local/bin/strt.sh"
     src: strt.sh
     mode: '0755'
+
+# tmux plugin support
+- name: ensure tmux plugin dir exists
+  become: no
+  ansible.builtin.file:
+    path: "~/.tmux/plugins"
+    state: directory
+    mode: 0755
+
+- name: Checkout solarized theme
+  become: no
+  ansible.builtin.git:
+    repo: 'https://github.com/tmux-plugins/tpm.git'
+    dest: "~/.tmux/plugins/tpm"
+
