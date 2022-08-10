@@ -15,5 +15,8 @@ sudo add-apt-repository --yes --update ppa:ansible/ansible
 sudo apt install ansible make
 ```
 
+## Install dependencies
+`make reqs`
+
 ## Run the playbook
 `make run`
