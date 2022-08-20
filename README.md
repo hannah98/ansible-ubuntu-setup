@@ -9,10 +9,10 @@
 
 ## Install ansible
 ```
-sudo apt update
-sudo apt install software-properties-common
-sudo add-apt-repository --yes --update ppa:ansible/ansible
-sudo apt install ansible make
+sudo apt update && \
+sudo apt -y install software-properties-common make && \
+sudo add-apt-repository --yes --update ppa:ansible/ansible && \
+sudo apt -y install ansible
 ```
 
 ## Install dependencies
