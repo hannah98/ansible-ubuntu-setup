@@ -32,10 +32,3 @@
     dest: "~/.vim/colors/solarized.vim"
     mode: '0644'
   when: not solarized_installed
-
-- name: Install vimrc
-  become: no
-  ansible.builtin.template:
-    src: vimrc
-    dest: "~/.vimrc"
-    mode: '0644'
