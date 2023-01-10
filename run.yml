@@ -9,6 +9,7 @@
     - role: grog.package
       tags:
         - apt
+    - role: hussainweb.chezmoi
     - role: initial-setup
     - role: bash-git-prompt
       tags:
@@ -21,9 +22,9 @@
     - role: vim
       tags:
         - vim
-    - role: my-profile
+    - role: batcat
       tags:
-        - profile
+        - batcat
     - role: tmux
       tags:
         - tmux

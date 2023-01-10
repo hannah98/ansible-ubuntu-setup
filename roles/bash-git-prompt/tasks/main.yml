@@ -14,13 +14,3 @@
     mode: '0644'
   become: no
 
-- name: Add bash-git-prompt to bashrc
-  blockinfile:
-    path: "~/.bashrc"
-    block: |
-      if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
-          # Custom theme will default to ~/.git-prompt-colors.sh for theme file
-          export GIT_PROMPT_THEME=Custom
-          source $HOME/.bash-git-prompt/gitprompt.sh
-      fi
-  become: no
