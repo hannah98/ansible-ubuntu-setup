@@ -5,9 +5,9 @@ GALAXY=/usr/bin/ansible-galaxy
 VAULT_PW_ARGS=
 
 ifdef TAGS
-TAGS :=  --tags $(TAGS) 
+ATAGS :=  --tags $(TAGS) 
 else
-TAGS := 
+ATAGS := 
 endif
 
 tags: ## list availble tags
@@ -15,10 +15,10 @@ tags: ## list availble tags
 
 	#$(PLAYBOOK) -b run.yml --check --tags externalfacing --limit externalfacing $(VAULT_PW_ARGS)
 test:
-	$(PLAYBOOK) run.yml --check $(TAGS)
+	$(PLAYBOOK) run.yml --check $(ATAGS)
 
 run: ## Run everything
-	$(PLAYBOOK) -b run.yml $(TAGS)
+	$(PLAYBOOK) -b run.yml $(ATAGS)
 
 decrypt: ## Decrypt the vault
 	$(VAULT) decrypt $(VAULT_PW_ARGS) $(VAULT_FILE)
