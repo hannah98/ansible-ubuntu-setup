@@ -41,5 +41,5 @@ package_list:
 
 # hussainweb.chezmoi
 # fails because it tries to run this as root:
-#chezmoi_init_url: git@github.com:hannah98/dotfiles.git
-my_chezmoi_init_url: git@github.com:hannah98/dotfiles.git
+chezmoi_init_url: git@github.com:hannah98/dotfiles.git
+#my_chezmoi_init_url: git@github.com:hannah98/dotfiles.git

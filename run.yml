@@ -12,9 +12,6 @@
     - role: hussainweb.chezmoi
       tags:
         - chezmoi
-    - role: chezmoi-dotfiles
-      tags:
-        - chezmoi
         - dotfiles
       become_user: bhannah
     - role: initial-setup
