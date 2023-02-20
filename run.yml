@@ -35,4 +35,9 @@
     - role: gron
       tags:
         - gron
+    - role: z-jump
+      tags:
+        - z-jump
+        - z.sh
+      become_user: bhannah
 
