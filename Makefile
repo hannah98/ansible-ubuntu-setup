@@ -17,7 +17,7 @@ tags: ## list availble tags
 test:
 	$(PLAYBOOK) run.yml --check $(ATAGS)
 
-run: ## Run everything
+run: ## Run everything - can use: make TAGS=tag run
 	$(PLAYBOOK) -b run.yml $(ATAGS)
 
 decrypt: ## Decrypt the vault
