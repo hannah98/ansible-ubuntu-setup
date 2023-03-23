@@ -28,6 +28,7 @@ package_list:
   - name: ack
   - name: bat
   - name: curl
+  - name: fzf
   - name: git
   - name: htop
   - name: libio-prompter-perl
