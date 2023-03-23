@@ -1,12 +1,5 @@
 ---
 
-- name: ensure local bin dir exists
-  become: no
-  ansible.builtin.file:
-    path: "~/.local/bin"
-    state: directory
-    mode: 0755
-
 - name: Get latest release from repository
   community.general.github_release:
     user: sharkdp
