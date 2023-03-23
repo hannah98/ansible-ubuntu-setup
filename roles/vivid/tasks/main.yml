@@ -1,0 +1,21 @@
+---
+
+- name: ensure local bin dir exists
+  become: no
+  ansible.builtin.file:
+    path: "~/.local/bin"
+    state: directory
+    mode: 0755
+
+- name: Get latest release from repository
+  community.general.github_release:
+    user: sharkdp
+    repo: vivid
+    action: latest_release
+  register: latest
+
+- name: Install deb
+  apt:
+    deb: "https://github.com/sharkdp/vivid/releases/download/{{ latest['tag'] }}/vivid_{{ latest['tag'] | regex_replace('^v','') }}_amd64.deb"
+  become: yes
+

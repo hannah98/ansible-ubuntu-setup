@@ -35,6 +35,9 @@
     - role: gron
       tags:
         - gron
+    - role: vivid
+      tags:
+        - vivid
     - role: z-jump
       tags:
         - z-jump
