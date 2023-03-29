@@ -10,6 +10,7 @@
       tags:
         - apt
     - role: hussainweb.chezmoi
+      ansible_become_user: root
       tags:
         - chezmoi
         - dotfiles
