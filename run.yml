@@ -16,11 +16,16 @@
         - dotfiles
       become_user: bhannah
     - role: initial-setup
+    - role: andrewrothstein.starship
+      tags:
+        - prompt
+        - starship
     - role: bash-git-prompt
       tags:
         - profile
         - git
         - bashrc
+        - never
     - role: update-script
       tags:
         - profile
