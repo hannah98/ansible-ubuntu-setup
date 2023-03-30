@@ -47,6 +47,9 @@
     - role: fd
       tags:
         - fd
+    - role: dust
+      tags:
+        - dust
     - role: z-jump
       tags:
         - z-jump
