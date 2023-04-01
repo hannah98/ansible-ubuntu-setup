@@ -20,12 +20,6 @@
       tags:
         - prompt
         - starship
-    - role: bash-git-prompt
-      tags:
-        - profile
-        - git
-        - bashrc
-        - never
     - role: update-script
       tags:
         - profile
