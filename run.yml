@@ -20,9 +20,6 @@
       tags:
         - prompt
         - starship
-    - role: update-script
-      tags:
-        - profile
     - role: vim
       tags:
         - vim

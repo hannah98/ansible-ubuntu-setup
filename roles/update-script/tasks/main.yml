@@ -1,8 +1,0 @@
----
-
-- name: install update_all.sh
-  become: no
-  ansible.builtin.template:
-    dest: "~/update_all.sh"
-    src: update_all.j2
-    mode: '0755'
