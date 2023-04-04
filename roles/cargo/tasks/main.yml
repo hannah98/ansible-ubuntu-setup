@@ -1,0 +1,6 @@
+---
+
+- name: Update/install to latest version
+  community.general.cargo:
+    name: topgrade
+    state: latest

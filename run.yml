@@ -9,6 +9,9 @@
     - role: grog.package
       tags:
         - apt
+        - rust
+        - cargo
+        - topgrade
     - role: hussainweb.chezmoi
       ansible_become_user: root
       tags:
@@ -45,5 +48,10 @@
       tags:
         - z-jump
         - z.sh
+    - role: cargo
+      tags:
+        - cargo
+        - rust
+        - topgrade
       become_user: bhannah
 
