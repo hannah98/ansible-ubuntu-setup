@@ -27,7 +27,6 @@ bash_exports:
 package_list:
   - name: ack
   - name: bat
-  - name: cargo
   - name: curl
   - name: fzf
   - name: git
