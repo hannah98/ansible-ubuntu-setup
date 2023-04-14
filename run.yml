@@ -41,6 +41,9 @@
     - role: dust
       tags:
         - dust
+    - role: tokei
+      tags:
+        - tokei
     - role: z-jump
       tags:
         - z-jump
