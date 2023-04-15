@@ -1,0 +1,23 @@
+---
+
+- name: Get latest release from repository
+  community.general.github_release:
+    user: ClementTsang
+    repo: bottom
+    action: latest_release
+  register: latest
+
+- name: Install topgrade
+  ansible.builtin.unarchive:
+    src: "https://github.com/ClementTsang/bottom/releases/download/{{ latest['tag'] }}/bottom_x86_64-unknown-linux-musl.tar.gz"
+    dest: "~/.local/bin"
+    remote_src: true
+
+#https://github.com/topgrade-rs/topgrade/releases/download/v10.3.3/topgrade-v10.3.3-x86_64-unknown-linux-musl.tar.gz
+
+- name: Make executable
+  become: no
+  file:
+    path: "~/.local/bin/btm"
+    mode: 0755
+
