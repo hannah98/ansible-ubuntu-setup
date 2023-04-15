@@ -1,28 +1,5 @@
 ---
 
-# my-profile role
-bash_aliases:
-  - { alias: "cat", command: "batcat -p --paging never"}
-  - { alias: "cls", command: "clear"}
-  - { alias: "dfh", command: "df -h ."}
-  - { alias: "dfm", command: "df -m ."}
-  - { alias: "dum", command: "du -sm $(ls -1A) | sort -n"}
-  - { alias: "lsd", command: "ls -l | grep ^d"}
-  - { alias: "lss", command: "ls -l | sort -nk5 | grep -v '^total'"}
-  - { alias: "lA", command: "ls -lA"}
-  - { alias: "lr", command: "ls -ltr"}
-  - { alias: "ll", command: "ls -l"}
-  - { alias: "pg", command: "ps -ef | grep $1"}
-  - { alias: "pp", command: "ps -fu${USER} |grep -v \"ps -fu${USER}\""}
-  - { alias: "pu", command: "ps -fu $1"}
-  - { alias: "reperl", command: "perl -de0"}
-  - { alias: "strt", command: "~/.local/bin/strt.sh"}
-
-# my-profile role
-bash_exports:
-  - { name: "BAT_THEME", value: "Solarized (dark)"}
-
-
 # grog.package
 package_list:
   - name: ack
