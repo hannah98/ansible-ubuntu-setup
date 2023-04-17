@@ -60,4 +60,14 @@
       tags:
         - bottom
       become_user: bhannah
+    - role: smug
+      tags:
+        - smug
+      become_user: bhannah
 
+  tasks:
+    - name: Testing
+      debug:
+        msg: "TESTING"
+      tags:
+        - testing

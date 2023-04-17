@@ -1,0 +1,28 @@
+---
+
+- name: ensure local bin dir exists
+  become: no
+  ansible.builtin.file:
+    path: "~/.local/bin"
+    state: directory
+    mode: 0755
+
+- name: Get latest release
+  community.general.github_release:
+    user: ivaaaan
+    repo: smug
+    action: latest_release
+  register: latest
+
+- name: Get gron binary
+  become: no
+  unarchive:
+    src: "https://github.com/ivaaaan/smug/releases/download/{{ latest['tag'] }}/smug_{{ latest['tag'] | regex_replace('^v','') }}_Linux_x86_64.tar.gz"
+    dest: "{{ lookup('env', 'HOME') }}/.local/bin"
+    remote_src: true
+
+- name: Make gron executable
+  become: no
+  file:
+    path: "~/.local/bin/smug"
+    mode: 0755
