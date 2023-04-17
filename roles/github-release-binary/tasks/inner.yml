@@ -74,6 +74,13 @@
   become: yes
   when: item.type == "deb"
 
+- name: Create symbolic link for yq
+  ansible.builtin.file:
+    src: "{{ item.symlink_src }}"
+    dest: "{{ item.symlink_dest }}"
+    state: link
+  when: item.symlink_src is defined and item.symlink_dest is defined
+
 - name: Make executable
   become: no
   file:
