@@ -22,3 +22,76 @@ chezmoi_init_url: git@github.com:hannah98/dotfiles.git
 
 # z.sh url
 zsh_url: "https://github.com/rupa/z/raw/master/z.sh"
+
+# github-release-binary
+ghrb:
+  # binary releases
+  - name: bottom
+    user: ClementTsang
+    repo: bottom
+    filename: "bottom_x86_64-unknown-linux-musl.tar.gz"
+    type: binary
+    dest: "~/.local/bin"
+    destfile: btm
+    #tag: 1.13.0
+  - name: gron
+    user: tomnomnom
+    repo: gron
+    filename: "gron-linux-amd64-zzTAGNOVzz.tgz"
+    type: binary
+    dest: "~/.local/bin"
+    destfile: gron
+  - name: just
+    user: casey
+    repo: just
+    filename: "just-zzTAGzz-x86_64-unknown-linux-musl.tar.gz"
+    type: binary
+    dest: "~/.local/bin"
+    destfile: just
+  - name: tokei
+    user: XAMPPRocky
+    repo: tokei
+    filename: "tokei-x86_64-unknown-linux-musl.tar.gz"
+    type: binary
+    dest: "~/.local/bin"
+    destfile: tokei
+  - name: smug
+    user: ivaaaan
+    repo: smug
+    filename: "smug_zzTAGNOVzz_Linux_x86_64.tar.gz"
+    type: binary
+    dest: "~/.local/bin"
+    destfile: smug
+  - name: topgrade
+    user: topgrade-rs
+    repo: topgrade
+    filename: "topgrade-zzTAGzz-x86_64-unknown-linux-musl.tar.gz"
+    type: binary
+    dest: "~/.local/bin"
+    destfile: topgrade
+  - name: yq
+    user: mikefarah
+    repo: yq
+    filename: "yq_linux_amd64.tar.gz"
+    type: binary
+    dest: "~/.local/bin"
+    destfile: yq
+  # deb releases
+  - name: fd
+    user: sharkdp
+    repo: fd
+    filename: "fd_zzTAGNOVzz_amd64.deb"
+    type: deb
+  - name: dust
+    user: bootandy
+    repo: dust
+    filename: "du-dust_zzTAGNOVzz_amd64.deb"
+    type: deb
+  - name: vivid
+    user: sharkdp
+    repo: vivid
+    filename: "vivid_zzTAGNOVzz_amd64.deb"
+    type: deb
+  
+
+

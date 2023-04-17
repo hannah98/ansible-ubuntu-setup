@@ -1,0 +1,92 @@
+---
+
+# examples;
+# in vars
+#bash_aliases:
+#  - { alias: "cat", command: "batcat -p --paging never"}
+#  - { alias: "cls", command: "clear"}
+#
+#bash_exports:
+#  - { name: "BAT_THEME", value: "Solarized (dark)"}
+# in role
+#- name: Setup Bash aliases
+#  become: no
+#  lineinfile:
+#    dest: "~/.bashrc"
+#    create: no
+#    line: "alias {{ item.alias }}='{{ item.command }}'"
+#    regexp: "^alias {{ item.alias }}="
+#  with_items: '{{bash_aliases}}'
+#
+#- name: Setup exported variables
+#  become: no
+#  lineinfile:
+#    dest: "~/.bashrc"
+#    create: no
+#    line: "export {{ item.name }}='{{ item.value }}'"
+#    regexp: "^export {{ item.name }}="
+#  with_items: '{{bash_exports}}'
+
+#releases_url: "https://github.com/{{ ghrb_org_name }}/{{ ghrb_repo_name }}/releases/download/{{ ghrb_file_name }}"
+
+# SEE: https://stackoverflow.com/a/69045498/40619
+
+- name: Get latest release from repository
+  community.general.github_release:
+    token: "{{ gh_public_token }}"
+    user: "{{ item.user }}"
+    repo: "{{ item.repo }}"
+    action: latest_release
+  register: latest
+  when: item.tag is undefined
+
+- name: Get version number
+  ansible.builtin.set_fact:
+    ghrb_tag: "{{ latest['tag'] }}"
+  when: item.tag is undefined and latest['tag'] is defined
+
+- name: Set version number from vars
+  ansible.builtin.set_fact:
+    ghrb_tag: "{{ item.tag }}"
+  when: item.tag is defined
+
+- name: Set version number with no v
+  ansible.builtin.set_fact:
+    ghrb_tagnov: "{{ ghrb_tag | regex_replace('^v','') }}"
+  when: ghrb_tag is defined
+
+- name: Set URL
+  ansible.builtin.set_fact:
+    ghrb_url: "https://github.com/{{ item.user }}/{{ item.repo }}/releases/download/{{ ghrb_tag }}/{{ item.filename | regex_replace('zzTAGNOVzz', ghrb_tagnov) | regex_replace('zzTAGzz', ghrb_tag) }}"
+
+- name: Get binary
+  become: no
+  unarchive:
+    src: "{{ ghrb_url }}"
+    dest: "~/.local/bin"
+    remote_src: true
+  when: item.type == "binary"
+
+- name: Install deb
+  apt:
+    deb: "{{ ghrb_url }}"
+  become_user: root
+  become: yes
+  when: item.type == "deb"
+
+- name: Make executable
+  become: no
+  file:
+    path: "{{ item.dest }}/{{ item.destfile }}"
+    mode: 0755
+  when: item.dest is defined and item.destfile is defined
+  
+- name: Debug version
+  debug:
+    msg: "Name: {{ item.name }}, tag: {{ ghrb_tag }}, tagnov: {{ ghrb_tagnov }}, url: {{ ghrb_url }}"
+  
+
+
+
+
+

@@ -1,8 +1,8 @@
 ---
 - hosts: all
   connection: local
-  #vars_files:
-    #- 'vars/vault.yml'
+  vars_files:
+    - 'vars/vault.yml'
 
   roles:
     # grog.package should stay at the top
@@ -68,12 +68,9 @@
       tags:
         - yq
       become_user: bhannah
-
-  tasks:
-    - name: GitHub Binary Releases
-      include_role:
-        name: github-release-binary
-      with_items:
-        - "{{ ghrb }}"
+    - role: github-release-binary
       tags:
         - testing
+        - cli
+        - clis
+      become_user: bhannah

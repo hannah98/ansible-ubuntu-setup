@@ -1,0 +1,16 @@
+---
+
+- name: ensure local bin dir exists
+  become: no
+  ansible.builtin.file:
+    path: "~/.local/bin"
+    state: directory
+    mode: 0755
+
+- name: Looping all GitHub Release Binaries in var ghrb
+  include_tasks: inner.yml
+  loop: "{{ ghrb }}"
+
+
+
+
