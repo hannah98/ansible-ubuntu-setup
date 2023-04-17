@@ -11,6 +11,20 @@
   include_tasks: inner.yml
   loop: "{{ ghrb }}"
 
+- name: Check if yq is installed
+  stat:
+    path: "~/.local/bin/yq_linux_amd64"
+  register: stat_result
+
+- name: Create symbolic link for yq
+  ansible.builtin.file:
+    src: "~/.local/bin/yq_linux_amd64"
+    dest: "~/.local/bin/yq"
+    state: link
+  when: stat_result.stat.exists
+
+# link /home/bhannah/.local/bin/yq_linux_amd64 to /home/bhannah/.local/bin/yq
+
 
 
 

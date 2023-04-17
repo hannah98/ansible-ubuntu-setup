@@ -29,48 +29,15 @@
     - role: tmux
       tags:
         - tmux
-    - role: gron
-      tags:
-        - gron
-    - role: vivid
-      tags:
-        - vivid
     - role: fd
       tags:
         - fd
-    - role: dust
-      tags:
-        - dust
-    - role: tokei
-      tags:
-        - tokei
     - role: z-jump
       tags:
         - z-jump
         - z.sh
-    - role: topgrade
-      tags:
-        - topgrade
-      become_user: bhannah
-    - role: just
-      tags:
-        - just
-      become_user: bhannah
-    - role: bottom
-      tags:
-        - bottom
-      become_user: bhannah
-    - role: smug
-      tags:
-        - smug
-      become_user: bhannah
-    - role: yq
-      tags:
-        - yq
-      become_user: bhannah
     - role: github-release-binary
       tags:
-        - testing
         - cli
         - clis
       become_user: bhannah
