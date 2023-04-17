@@ -29,9 +29,6 @@
     - role: tmux
       tags:
         - tmux
-    - role: fd
-      tags:
-        - fd
     - role: z-jump
       tags:
         - z-jump
