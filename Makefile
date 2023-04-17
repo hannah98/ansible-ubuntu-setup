@@ -2,7 +2,9 @@
 
 PLAYBOOK=/usr/bin/ansible-playbook
 GALAXY=/usr/bin/ansible-galaxy
-VAULT_PW_ARGS=
+VAULT=ansible-vault
+VAULT_FILE=vars/vault.yml
+VAULT_PW_ARGS=--vault-password-file .vpw
 
 ifdef TAGS
 ATAGS :=  --tags $(TAGS) 
@@ -18,7 +20,7 @@ test:
 	$(PLAYBOOK) run.yml --check $(ATAGS)
 
 run: ## Run everything - can use: make TAGS=tag run
-	$(PLAYBOOK) -b run.yml $(ATAGS)
+	$(PLAYBOOK) -b run.yml $(VAULT_PW_ARGS) $(ATAGS)
 
 decrypt: ## Decrypt the vault
 	$(VAULT) decrypt $(VAULT_PW_ARGS) $(VAULT_FILE)
