@@ -76,6 +76,8 @@ ghrb:
     type: binary
     dest: "~/.local/bin"
     destfile: yq
+    symlink_src: "~/.local/bin/yq_linux_amd64"
+    symlink_dest: "~/.local/bin/yq"
   # deb releases
   - name: fd
     user: sharkdp

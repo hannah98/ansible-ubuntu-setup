@@ -74,7 +74,7 @@
   become: yes
   when: item.type == "deb"
 
-- name: Create symbolic link for yq
+- name: Create symbolic link
   ansible.builtin.file:
     src: "{{ item.symlink_src }}"
     dest: "{{ item.symlink_dest }}"
