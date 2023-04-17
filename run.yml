@@ -64,10 +64,16 @@
       tags:
         - smug
       become_user: bhannah
+    - role: yq
+      tags:
+        - yq
+      become_user: bhannah
 
   tasks:
-    - name: Testing
-      debug:
-        msg: "TESTING"
+    - name: GitHub Binary Releases
+      include_role:
+        name: github-release-binary
+      with_items:
+        - "{{ ghrb }}"
       tags:
         - testing
