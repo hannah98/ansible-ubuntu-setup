@@ -11,3 +11,19 @@
   include_tasks: inner.yml
   loop: "{{ ghrb }}"
 
+- name: Find files to cleanup in ~/.local/bin
+  find:
+    paths: "~/.local/bin"
+    patterns: '*.1,*.md,LICENSE'
+  register: files_to_delete
+
+- name: Cleanup files from ~/.local/bin
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  when: item.path not in files_to_skip
+  with_items: "{{ files_to_delete.files }}"
+  vars:
+    files_to_skip:
+      - important.txt
+      #- important.txt

@@ -33,6 +33,7 @@ ghrb:
     type: binary
     dest: "~/.local/bin"
     destfile: btm
+    version_cmd: "btm --version | awk '{print $NF}'"
     #tag: 1.13.0
   - name: gron
     user: tomnomnom
@@ -41,6 +42,7 @@ ghrb:
     type: binary
     dest: "~/.local/bin"
     destfile: gron
+    version_cmd: "gron --version | awk '{print $NF}'"
   - name: just
     user: casey
     repo: just
@@ -48,6 +50,7 @@ ghrb:
     type: binary
     dest: "~/.local/bin"
     destfile: just
+    version_cmd: "just --version | awk '{print $NF}'"
   - name: tokei
     user: XAMPPRocky
     repo: tokei
@@ -55,6 +58,7 @@ ghrb:
     type: binary
     dest: "~/.local/bin"
     destfile: tokei
+    version_cmd: "tokei --version | awk '{print $2}'"
   - name: smug
     user: ivaaaan
     repo: smug
@@ -62,6 +66,7 @@ ghrb:
     type: binary
     dest: "~/.local/bin"
     destfile: smug
+    version_cmd: "smug --help | grep Version | awk '{print $NF}'"
   - name: topgrade
     user: topgrade-rs
     repo: topgrade
@@ -69,6 +74,7 @@ ghrb:
     type: binary
     dest: "~/.local/bin"
     destfile: topgrade
+    version_cmd: "topgrade --version | awk '{print $NF}'"
   - name: yq
     user: mikefarah
     repo: yq
@@ -78,22 +84,26 @@ ghrb:
     destfile: yq
     symlink_src: "~/.local/bin/yq_linux_amd64"
     symlink_dest: "~/.local/bin/yq"
+    version_cmd: "yq --version | awk '{print $NF}'"
   # deb releases
   - name: fd
     user: sharkdp
     repo: fd
     filename: "fd_zzTAGNOVzz_amd64.deb"
     type: deb
+    version_cmd: "fd --version | awk '{print $NF}'"
   - name: dust
     user: bootandy
     repo: dust
     filename: "du-dust_zzTAGNOVzz_amd64.deb"
     type: deb
+    version_cmd: "dust --version | awk '{print $NF}'"
   - name: vivid
     user: sharkdp
     repo: vivid
     filename: "vivid_zzTAGNOVzz_amd64.deb"
     type: deb
+    version_cmd: "vivid --version | awk '{print $NF}'"
   
 
 
