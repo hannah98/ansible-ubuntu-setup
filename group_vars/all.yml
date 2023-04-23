@@ -104,6 +104,12 @@ ghrb:
     filename: "vivid_zzTAGNOVzz_amd64.deb"
     type: deb
     version_cmd: "vivid --version | awk '{print $NF}'"
+  - name: zoxide
+    user: ajeetdsouza
+    repo: zoxide
+    filename: "zoxide_zzTAGNOVzz_amd64.deb"
+    type: deb
+    version_cmd: "zoxide --version | awk '{print $NF}'"
   
 
 
