@@ -35,6 +35,16 @@ ghrb:
     destfile: btm
     version_cmd: "btm --version | awk '{print $NF}'"
     #tag: 1.13.0
+  - name: exa
+    user: ogham
+    repo: exa
+    filename: "exa-linux-x86_64-musl-zzTAGzz.zip"
+    type: binary
+    dest: "~/.local/bin"
+    destfile: exa
+    extra_opts: -j
+    include: "bin/exa"
+    version_cmd: "exa --version | grep -i ^v | awk '{print $1}'"
   - name: gron
     user: tomnomnom
     repo: gron
@@ -50,6 +60,7 @@ ghrb:
     type: binary
     dest: "~/.local/bin"
     destfile: just
+    include: "just"
     version_cmd: "just --version | awk '{print $NF}'"
   - name: tokei
     user: XAMPPRocky

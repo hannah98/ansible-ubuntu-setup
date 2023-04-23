@@ -42,6 +42,9 @@
       src: "{{ ghrb_url }}"
       dest: "~/.local/bin"
       remote_src: true
+      extra_opts: "{{ item.extra_opts | default([]) }}"
+      include: "{{ item.include | default([]) }}"
+      list_files: true
     when: item.type == "binary"
 
   - name: Install deb for {{ item.name }}
