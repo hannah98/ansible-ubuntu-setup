@@ -29,10 +29,6 @@
     - role: tmux
       tags:
         - tmux
-    - role: z-jump
-      tags:
-        - z-jump
-        - z.sh
     - role: github-release-binary
       tags:
         - cli

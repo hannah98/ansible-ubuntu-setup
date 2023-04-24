@@ -20,9 +20,6 @@ package_list:
 # hussainweb.chezmoi
 chezmoi_init_url: git@github.com:hannah98/dotfiles.git
 
-# z.sh url
-zsh_url: "https://github.com/rupa/z/raw/master/z.sh"
-
 # github-release-binary
 ghrb:
   # binary releases
