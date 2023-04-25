@@ -67,7 +67,7 @@
       path: "{{ item.dest }}/{{ item.destfile }}"
       mode: 0755
     when: item.dest is defined and item.destfile is defined
-    
+
   - name: Debug version for {{ item.name }}
     debug:
       msg: "Name: {{ item.name }}, tag: {{ ghrb_tag }}, tagnov: {{ ghrb_tagnov }}, url: {{ ghrb_url }}"
