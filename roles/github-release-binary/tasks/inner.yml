@@ -71,5 +71,5 @@
   - name: Debug version for {{ item.name }}
     debug:
       msg: "Name: {{ item.name }}, tag: {{ ghrb_tag }}, tagnov: {{ ghrb_tagnov }}, url: {{ ghrb_url }}"
-
+  # block when
   when: version_output.stdout|lower != ghrb_tagnov|lower and version_output.stdout|lower != ghrb_tag|lower
