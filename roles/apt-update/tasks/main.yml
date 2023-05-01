@@ -27,4 +27,3 @@
     post_reboot_delay: "{{ server_update_reboot_post_reboot_delay }}"
     reboot_timeout: "{{ server_update_reboot_reboot_timeout }}"
   when: reboot_default | bool and reboot_hint_result | bool and 'noreboot' not in group_names
-

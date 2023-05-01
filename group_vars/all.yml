@@ -129,6 +129,3 @@ ghrb:
     filename: "zoxide_zzTAGNOVzz_amd64.deb"
     type: deb
     version_cmd: "zoxide --version | awk '{print $NF}'"
-  
-
-

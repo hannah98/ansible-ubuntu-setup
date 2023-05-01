@@ -7,9 +7,9 @@ VAULT_FILE=vars/vault.yml
 VAULT_PW_ARGS=--vault-password-file .vpw
 
 ifdef TAGS
-ATAGS :=  --tags $(TAGS) 
+ATAGS :=  --tags $(TAGS)
 else
-ATAGS := 
+ATAGS :=
 endif
 
 tags: ## list availble tags
