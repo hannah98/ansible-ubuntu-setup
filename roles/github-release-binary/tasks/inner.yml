@@ -6,6 +6,23 @@
   ansible.builtin.shell: "{{ item.version_cmd }}"
   register: version_output
 
+- name: Check for specific name
+  ansible.builtin.set_fact:
+    checktag: "cli={{ item.name }}"
+  when: ansible_run_tags
+
+- name: Check for override tag
+  ansible.builtin.set_fact:
+    override: "{{ version_output.stdout|lower }}"
+  when: "'singlecli' in ansible_run_tags"
+
+- name: Override version
+  ansible.builtin.set_fact:
+    skip_override: "{{ version_output.stdout|lower }}"
+    item:
+      tag: "{{ version_output.stdout|lower }}"
+  when: 'checktag | string in ansible_run_tags'
+
 - name: Get latest release from repository for {{ item.name }}
   community.general.github_release:
     token: "{{ gh_public_token }}"
@@ -13,7 +30,7 @@
     repo: "{{ item.repo }}"
     action: latest_release
   register: latest
-  when: item.tag is undefined
+  when: item.tag is undefined or (override is defined and skip_override is not defined)
 
 - name: Get version number for {{ item.name }}
   ansible.builtin.set_fact:
@@ -54,7 +71,14 @@
     become: yes
     when: item.type == "deb"
 
-  - name: Create symbolic link for {{ item.name }}
+  - name: Get appimage for {{ item.name }}
+    ansible.builtin.get_url:
+      url: "{{ ghrb_url }}"
+      dest: "{{ item.dest }}/{{ item.destfile }}"
+      mode: '0755'
+    when: item.type == "appimage"
+
+  - name: Create symbolic link for {{ item.name }} {{ item.symlink_src }} {{ item.symlink_dest }}
     ansible.builtin.file:
       src: "{{ item.symlink_src }}"
       dest: "{{ item.symlink_dest }}"
@@ -66,7 +90,7 @@
     file:
       path: "{{ item.dest }}/{{ item.destfile }}"
       mode: 0755
-    when: item.dest is defined and item.destfile is defined
+    when: item.dest is defined and item.destfile is defined and item.type != "appimage"
 
   - name: Debug version for {{ item.name }}
     debug:
