@@ -117,6 +117,12 @@ ghrb:
     filename: "du-dust_zzTAGNOVzz_amd64.deb"
     type: deb
     version_cmd: "dust --version | awk '{print $NF}'"
+  - name: ripgrep
+    user: BurntSushi
+    repo: ripgrep
+    filename: "ripgrep_zzTAGNOVzz_amd64.deb"
+    type: deb
+    version_cmd: "rg --version | grep ^ripgrep | awk '{print $2}'"
   - name: vivid
     user: sharkdp
     repo: vivid
