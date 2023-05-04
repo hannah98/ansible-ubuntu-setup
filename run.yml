@@ -38,3 +38,7 @@
         - cli
         - clis
       become_user: bhannah
+    - role: nvm
+      tags:
+        - nvm
+      become_user: bhannah

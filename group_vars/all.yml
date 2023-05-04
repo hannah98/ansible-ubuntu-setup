@@ -18,6 +18,7 @@ package_list:
   - name: wget
 
 apt_cache_proxy: http://10.10.8.140:3142
+nvm_version: v0.39.3
 
 # hussainweb.chezmoi
 chezmoi_init_url: git@github.com:hannah98/dotfiles.git
