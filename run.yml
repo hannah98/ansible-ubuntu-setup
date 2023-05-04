@@ -9,6 +9,10 @@
     - role: grog.package
       tags:
         - apt
+    - role: apt-cacher-ng
+      tags:
+        - apt
+        - apt-cache
     - role: hussainweb.chezmoi
       ansible_become_user: root
       tags:

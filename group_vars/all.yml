@@ -17,6 +17,8 @@ package_list:
   - name: vim
   - name: wget
 
+apt_cache_proxy: http://10.10.8.140:3142
+
 # hussainweb.chezmoi
 chezmoi_init_url: git@github.com:hannah98/dotfiles.git
 
