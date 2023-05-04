@@ -65,10 +65,12 @@ ghrb:
   - name: neovim
     user: neovim
     repo: neovim
-    filename: "nvim.appimage"
-    type: appimage
+    filename: "nvim-linux64.tar.gz"
+    type: binary
     dest: "~/.local/bin"
-    destfile: nvim
+    destfile: "nvim-linux64/bin/nvim"
+    symlink_src: "~/.local/bin/nvim-linux64/bin/nvim"
+    symlink_dest: "~/.local/bin/nvim"
     version_cmd: "nvim  --version || echo 0 | grep -i nvim | head -1 | awk '{print $NF}'"
   - name: tokei
     user: XAMPPRocky
