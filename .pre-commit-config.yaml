@@ -9,7 +9,10 @@ repos:
   - id: check-yaml
   - id: check-added-large-files
 
-- repo: /home/bhannah/projects/ansible-encrypted-vault
-  rev: d61397468d8c216e2b39c0375c5625a59df96861
+- repo: local
   hooks:
   - id: ansible-encrypted-vault
+    name: Ansible Encrypted Vault
+    entry: check_encrypted.sh
+    language: script
+    files: vars/vault.yml
