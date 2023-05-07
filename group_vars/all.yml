@@ -12,6 +12,7 @@ package_list:
   - name: libjson-perl
   - name: libjson-xs-perl
   - name: python3-pip
+  - name: sqlite3
   - name: sudo
   - name: tmux
   - name: vim
