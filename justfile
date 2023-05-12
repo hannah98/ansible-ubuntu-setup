@@ -11,16 +11,16 @@ default:
 
 # Decrypt the vault
 decrypt:
-    {{VAULT}} decrypt {{VAULT_PW_ARGS}} {{VAULT_FILE}} 
+    {{VAULT}} decrypt {{VAULT_PW_ARGS}} {{VAULT_FILE}}
 
 # Encrypt the vault
 encrypt:
-    {{VAULT}} encrypt {{VAULT_PW_ARGS}} {{VAULT_FILE}} 
+    {{VAULT}} encrypt {{VAULT_PW_ARGS}} {{VAULT_FILE}}
 
 # Install requirements
 reqs:
     {{GALAXY}} install -r requirements.yml
-    {{GALAXY}} collection install community.general 
+    {{GALAXY}} collection install community.general
 
 # Force install requirements
 forcereqs:
