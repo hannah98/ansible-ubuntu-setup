@@ -1,0 +1,113 @@
+---
+
+# SEE: https://stackoverflow.com/a/69045498/40619
+
+- name: Get latest version of local binary for {{ item.name }}
+  ansible.builtin.shell: "{{ item.version_cmd }}"
+  register: version_output
+
+- name: Check for specific name
+  ansible.builtin.set_fact:
+    checktag: "cli={{ item.name }}"
+  when: ansible_run_tags
+
+- name: Check for override tag
+  ansible.builtin.set_fact:
+    override: "{{ version_output.stdout|lower }}"
+  when: "'singlecli' in ansible_run_tags"
+
+- name: Override version
+  ansible.builtin.set_fact:
+    skip_override: "{{ version_output.stdout|lower }}"
+    item:
+      tag: "{{ version_output.stdout|lower }}"
+  when: 'checktag | string in ansible_run_tags'
+
+- name: Get latest release from local repository
+  ansible.builtin.uri:
+    url: http://10.10.8.140:8289/index.json
+    return_content: true
+    body_format: json
+  register: this
+  failed_when: "'gron' not in this.content"
+
+- name: Debug!
+  debug:
+    msg: "{{this.json[item.name].version}}"
+
+- meta: end_play
+
+- name: Get latest release from repository for {{ item.name }}
+  community.general.github_release:
+    token: "{{ gh_public_token }}"
+    user: "{{ item.user }}"
+    repo: "{{ item.repo }}"
+    action: latest_release
+  register: latest
+  when: item.tag is undefined or (override is defined and skip_override is not defined)
+
+- name: Get version number for {{ item.name }}
+  ansible.builtin.set_fact:
+    ghrb_tag: "{{ latest['tag'] }}"
+  when: item.tag is undefined and latest['tag'] is defined
+
+- name: Set version number from vars for {{ item.name }}
+  ansible.builtin.set_fact:
+    ghrb_tag: "{{ item.tag }}"
+  when: item.tag is defined
+
+- name: Set version number with no v for {{ item.name }}
+  ansible.builtin.set_fact:
+    ghrb_tagnov: "{{ ghrb_tag | regex_replace('^v','') }}"
+  when: ghrb_tag is defined
+
+- name: Install {{ item.name }}
+  block:
+  - name: Set URL for {{ item.name }}
+    ansible.builtin.set_fact:
+      ghrb_url: "https://github.com/{{ item.user }}/{{ item.repo }}/releases/download/{{ ghrb_tag }}/{{ item.filename | regex_replace('zzTAGNOVzz', ghrb_tagnov) | regex_replace('zzTAGzz', ghrb_tag) }}"
+
+  - name: Get binary for {{ item.name }}
+    become: no
+    unarchive:
+      src: "{{ ghrb_url }}"
+      dest: "~/.local/bin"
+      remote_src: true
+      extra_opts: "{{ item.extra_opts | default([]) }}"
+      include: "{{ item.include | default([]) }}"
+      list_files: true
+    when: item.type == "binary"
+
+  - name: Install deb for {{ item.name }}
+    apt:
+      deb: "{{ ghrb_url }}"
+    become_user: root
+    become: yes
+    when: item.type == "deb"
+
+  - name: Get appimage for {{ item.name }}
+    ansible.builtin.get_url:
+      url: "{{ ghrb_url }}"
+      dest: "{{ item.dest }}/{{ item.destfile }}"
+      mode: '0755'
+    when: item.type == "appimage"
+
+  - name: Create symbolic link for {{ item.name }} {{ item.symlink_src }} {{ item.symlink_dest }}
+    ansible.builtin.file:
+      src: "{{ item.symlink_src }}"
+      dest: "{{ item.symlink_dest }}"
+      state: link
+    when: item.symlink_src is defined and item.symlink_dest is defined
+
+  - name: Make executable for {{ item.name }}
+    become: no
+    file:
+      path: "{{ item.dest }}/{{ item.destfile }}"
+      mode: 0755
+    when: item.dest is defined and item.destfile is defined and item.type != "appimage"
+
+  - name: Debug version for {{ item.name }}
+    debug:
+      msg: "Name: {{ item.name }}, tag: {{ ghrb_tag }}, tagnov: {{ ghrb_tagnov }}, url: {{ ghrb_url }}"
+  # block when
+  when: version_output.stdout|lower != ghrb_tagnov|lower and version_output.stdout|lower != ghrb_tag|lower

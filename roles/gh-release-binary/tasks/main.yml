@@ -1,0 +1,33 @@
+---
+
+- name: ensure local bin dir exists
+  become: no
+  ansible.builtin.file:
+    path: "~/.local/bin"
+    state: directory
+    mode: 0755
+
+- name: Get latest release numbers from local repository
+  ansible.builtin.uri:
+    url: http://10.10.8.140:8289/index.json
+    return_content: true
+    body_format: json
+  register: this
+  failed_when: "'gron' not in this.content"
+
+- name: Get latest version of local binary for {{ item.name }}
+  ansible.builtin.shell: "{{ item.version_cmd }}"
+  register: version_output
+  loop: "{{ ghrb }}"
+
+- name: Debug
+  debug:
+    msg: "{{ item.item.name }}.{{ item.stdout }}"
+  loop: "{{ version_output.results }}"
+  when: item.stdout | lower | regex_replace('^v','') != this.json[item.item.name].version | lower | regex_replace('^v','')
+
+
+- name: Looping all GitHub Release Binaries in var ghrb
+  include_tasks: myrepo.yml
+  loop: "{{ version_output.results }}"
+  when: item.stdout | lower | regex_replace('^v','') != this.json[item.item.name].version | lower | regex_replace('^v','')

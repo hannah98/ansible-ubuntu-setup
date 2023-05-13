@@ -8,7 +8,7 @@
     mode: 0755
 
 - name: Looping all GitHub Release Binaries in var ghrb
-  include_tasks: inner.yml
+  include_tasks: myrepo.yml
   loop: "{{ ghrb }}"
 
 - name: Find files to cleanup in ~/.local/bin
@@ -26,4 +26,3 @@
   vars:
     files_to_skip:
       - important.txt
-      #- important.txt

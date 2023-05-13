@@ -72,7 +72,7 @@ ghrb:
     destfile: "nvim-linux64/bin/nvim"
     symlink_src: "~/.local/bin/nvim-linux64/bin/nvim"
     symlink_dest: "~/.local/bin/nvim"
-    version_cmd: "nvim  --version || echo 0 | grep -i nvim | head -1 | awk '{print $NF}'"
+    version_cmd: "nvim  --version | grep -i nvim | head -1 | awk '{print $NF}'"
   - name: tokei
     user: XAMPPRocky
     repo: tokei

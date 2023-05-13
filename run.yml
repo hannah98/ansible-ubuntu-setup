@@ -43,6 +43,12 @@
         - cli
         - clis
       become_user: bhannah
+    - role: gh-release-binary
+      tags:
+        - cli
+        - clis
+        - clitest
+      become_user: bhannah
     - role: nvm
       tags:
         - nvm
