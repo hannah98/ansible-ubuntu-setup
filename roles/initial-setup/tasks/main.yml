@@ -1,5 +1,4 @@
 ---
-
 - name: remove ubuntu motd spam
   become: true
   file:
@@ -20,8 +19,8 @@
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
   with_items:
-    - { regexp: '^ - set_hostname', line: '# - set_hostname' }
-    - { regexp: '^ - update_hostname', line: '# - update_hostname' }
+    - { regexp: "^ - set_hostname", line: "# - set_hostname" }
+    - { regexp: "^ - update_hostname", line: "# - update_hostname" }
   when: cloud_cfg.stat.exists == True
 
 - name: Set timezone
@@ -29,7 +28,7 @@
     name: America/Chicago
 
 - name: import keys from github
-  become: no
+  become: false
   authorized_key:
     user: "{{ ansible_user | default('bhannah') }}"
     state: present

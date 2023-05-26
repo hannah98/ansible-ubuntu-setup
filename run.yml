@@ -2,7 +2,7 @@
 - hosts: all
   connection: local
   vars_files:
-    - 'vars/vault.yml'
+    - "vars/vault.yml"
 
   roles:
     # grog.package should stay at the top

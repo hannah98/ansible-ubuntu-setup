@@ -1,5 +1,4 @@
 ---
-
 # grog.package
 package_list:
   - name: ack
@@ -35,7 +34,7 @@ ghrb:
     dest: "~/.local/bin"
     destfile: btm
     version_cmd: "btm --version | awk '{print $NF}'"
-    #tag: 1.13.0
+    # tag: 1.13.0
   - name: exa
     user: ogham
     repo: exa

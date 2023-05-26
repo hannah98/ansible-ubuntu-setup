@@ -1,7 +1,6 @@
 ---
-
 - name: Setup apt cacher ng address
   ansible.builtin.lineinfile:
     path: /etc/apt/apt.conf.d/00aptproxy
     line: Acquire::http::Proxy "{{ apt_cache_proxy }}";
-    create: yes
+    create: true
