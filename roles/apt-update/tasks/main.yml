@@ -14,12 +14,12 @@
 - name: set fact reboot hint false
   set_fact:
     reboot_hint_result: false
-  when: ansible_os_family == "Debian" and reboot_default | bool and apt_reboot_hint_result.stat.exists == false # noqa 601
+  when: ansible_os_family == "Debian" and reboot_default | bool and apt_reboot_hint_result.stat.exists == false
 
 - name: set fact reboot hint true
   set_fact:
     reboot_hint_result: true
-  when: ansible_os_family == "Debian" and reboot_default | bool and apt_reboot_hint_result.stat.exists == true # noqa 601
+  when: ansible_os_family == "Debian" and reboot_default | bool and apt_reboot_hint_result.stat.exists == true
 
 - name: restart server
   reboot:
