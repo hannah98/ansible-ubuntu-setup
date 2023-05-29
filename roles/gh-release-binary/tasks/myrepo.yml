@@ -1,0 +1,36 @@
+---
+
+- name: Debug
+  debug:
+    msg: "Upgrade {{ item.item.name }} from {{ item.stdout }} to {{ this.json[item.item.name].version }}"
+
+- name: Set url from {{ item.item.name }}
+  ansible.builtin.set_fact:
+    ghrb_url: "http://10.10.8.140:8289/packages/{{ item.item.name }}/latest/asset"
+
+
+- name: Get archive for {{ item.item.name }}
+  become: false
+  unarchive:
+    src: "{{ ghrb_url }}/{{ item.item.name }}.tar.gz"
+    dest: "~/.local/bin"
+    remote_src: true
+  when: item.item.type == "archive"
+
+- name: Get binary for {{ item.item.name }}
+  become: false
+  ansible.builtin.get_url:
+    url: "{{ ghrb_url }}/{{ item.item.destfile }}"
+    dest: "~/.local/bin"
+    #remote_src: true
+    #extra_opts: "{{ item.item.extra_opts | default([]) }}"
+    #include: "{{ item.item.include | default([]) }}"
+    #list_files: true
+  when: item.item.type == "binary"
+
+- name: Install deb for {{ item.item.name }}
+  apt:
+    deb: "{{ ghrb_url }}/{{ item.item.name }}.deb"
+  become_user: root
+  become: true
+  when: item.item.type == "deb"

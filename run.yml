@@ -42,6 +42,7 @@
       tags:
         - cli
         - clis
+        - never
       become_user: bhannah
     - role: gh-release-binary
       tags:

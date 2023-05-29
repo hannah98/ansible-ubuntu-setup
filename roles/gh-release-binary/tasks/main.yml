@@ -19,11 +19,11 @@
   register: version_output
   loop: "{{ ghrb }}"
 
-- name: Debug
-  debug:
-    msg: "{{ item.item.name }}.{{ item.stdout }}->{{ this.json[item.item.name].version }}"
-  loop: "{{ version_output.results }}"
-  when: item.stdout | lower | regex_replace('^v','') != this.json[item.item.name].version | lower | regex_replace('^v','')
+#- name: Debug
+  #  debug:
+#  msg: "{{ item.item.name }}.{{ item.stdout }}->{{ this.json[item.item.name].version }}"
+  #  loop: "{{ version_output.results }}"
+  #when: item.stdout | lower | regex_replace('^v','') != this.json[item.item.name].version | lower | regex_replace('^v','')
 
 - name: Looping all GitHub Release Binaries in var ghrb
   include_tasks: myrepo.yml
