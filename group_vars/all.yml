@@ -88,6 +88,11 @@ ghrb:
     dest: "~/.local/bin"
     destfile: smug
     version_cmd: "smug --help | grep Version | awk '{print $NF}'"
+  - name: tealdeer
+    type: binary
+    dest: "~/.local/bin"
+    destfile: tldr
+    version_cmd: "~/.local/bin/tldr --version | awk '{print $2}'"
   - name: topgrade
     user: topgrade-rs
     repo: topgrade
