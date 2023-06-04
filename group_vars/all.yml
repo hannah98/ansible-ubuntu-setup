@@ -10,12 +10,17 @@ package_list:
   - name: libio-prompter-perl
   - name: libjson-perl
   - name: libjson-xs-perl
+  - name: python3.10-venv
   - name: python3-pip
+  - name: python3-virtualenv
+  - name: shellcheck
+  - name: shfmt
   - name: sqlite3
   - name: sudo
   - name: tmux
   - name: vim
   - name: wget
+  - name: yamllint
 
 apt_cache_proxy: http://10.10.8.140:3142
 nvm_version: v0.39.3
