@@ -32,18 +32,12 @@ chezmoi_init_url: git@github.com:hannah98/dotfiles.git
 ghrb:
   # binary releases
   - name: bottom
-    user: ClementTsang
-    repo: bottom
-    filename: "bottom_x86_64-unknown-linux-musl.tar.gz"
     type: binary
     dest: "~/.local/bin"
     destfile: btm
     version_cmd: "btm --version | awk '{print $NF}'"
     # tag: 1.13.0
   - name: exa
-    user: ogham
-    repo: exa
-    filename: "exa-linux-x86_64-musl-zzTAGzz.zip"
     type: binary
     dest: "~/.local/bin"
     destfile: exa
@@ -51,26 +45,17 @@ ghrb:
     include: "bin/exa"
     version_cmd: "exa --version | grep -i ^v | awk '{print $1}'"
   - name: gron
-    user: tomnomnom
-    repo: gron
-    filename: "gron-linux-amd64-zzTAGNOVzz.tgz"
     type: binary
     dest: "~/.local/bin"
     destfile: gron
     version_cmd: "gron --version | awk '{print $NF}'"
   - name: just
-    user: casey
-    repo: just
-    filename: "just-zzTAGzz-x86_64-unknown-linux-musl.tar.gz"
     type: binary
     dest: "~/.local/bin"
     destfile: just
     include: "just"
     version_cmd: "just --version | awk '{print $NF}'"
   - name: neovim
-    user: neovim
-    repo: neovim
-    filename: "nvim-linux64.tar.gz"
     type: archive
     dest: "~/.local/bin"
     destfile: "nvim-linux64/bin/nvim"
@@ -78,17 +63,11 @@ ghrb:
     symlink_dest: "~/.local/bin/nvim"
     version_cmd: "nvim  --version | grep -i nvim | head -1 | awk '{print $NF}'"
   - name: tokei
-    user: XAMPPRocky
-    repo: tokei
-    filename: "tokei-x86_64-unknown-linux-musl.tar.gz"
     type: binary
     dest: "~/.local/bin"
     destfile: tokei
     version_cmd: "tokei --version | awk '{print $2}'"
   - name: smug
-    user: ivaaaan
-    repo: smug
-    filename: "smug_zzTAGNOVzz_Linux_x86_64.tar.gz"
     type: binary
     dest: "~/.local/bin"
     destfile: smug
@@ -99,51 +78,38 @@ ghrb:
     destfile: tldr
     version_cmd: "~/.local/bin/tldr --version | awk '{print $2}'"
   - name: topgrade
-    user: topgrade-rs
-    repo: topgrade
-    filename: "topgrade-zzTAGzz-x86_64-unknown-linux-musl.tar.gz"
     type: binary
     dest: "~/.local/bin"
     destfile: topgrade
     version_cmd: "topgrade --version | awk '{print $NF}'"
   - name: yq
-    user: mikefarah
-    repo: yq
-    filename: "yq_linux_amd64.tar.gz"
     type: binary
     dest: "~/.local/bin"
     destfile: yq
     symlink_src: "~/.local/bin/yq_linux_amd64"
     symlink_dest: "~/.local/bin/yq"
     version_cmd: "yq --version | awk '{print $NF}'"
-  # deb releases
   - name: fd
-    user: sharkdp
-    repo: fd
-    filename: "fd_zzTAGNOVzz_amd64.deb"
-    type: deb
-    version_cmd: "fd --version | awk '{print $NF}'"
+    type: binary
+    dest: "~/.local/bin"
+    destfile: fd
+    version_cmd: "~/.local/bin/fd --version | awk '{print $NF}'"
   - name: dust
-    user: bootandy
-    repo: dust
-    filename: "du-dust_zzTAGNOVzz_amd64.deb"
-    type: deb
-    version_cmd: "dust --version | awk '{print $NF}'"
+    type: binary
+    dest: "~/.local/bin"
+    destfile: dust
+    version_cmd: "~/.local/bin/dust --version | awk '{print $NF}'"
   - name: ripgrep
-    user: BurntSushi
-    repo: ripgrep
-    filename: "ripgrep_zzTAGNOVzz_amd64.deb"
-    type: deb
-    version_cmd: "rg --version | grep ^ripgrep | awk '{print $2}'"
+    type: binary
+    dest: "~/.local/bin"
+    destfile: rg
+    version_cmd: "~/.local/bin/rg --version | grep ^ripgrep | awk '{print $2}'"
   - name: vivid
-    user: sharkdp
-    repo: vivid
-    filename: "vivid_zzTAGNOVzz_amd64.deb"
-    type: deb
-    version_cmd: "vivid --version | awk '{print $NF}'"
+    type: binary
+    dest: "~/.local/bin"
+    destfile: vivid
+    version_cmd: "~/.local/bin/vivid --version | awk '{print $NF}'"
   - name: zoxide
-    user: ajeetdsouza
-    repo: zoxide
-    filename: "zoxide_zzTAGNOVzz_amd64.deb"
-    type: deb
-    version_cmd: "zoxide --version | awk '{print $NF}'"
+    type: binary
+    version_cmd: "~/.local/bin/zoxide --version | awk '{print $NF}'"
+    destfile: zoxide
