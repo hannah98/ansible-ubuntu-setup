@@ -10,6 +10,7 @@ package_list:
   - name: libio-prompter-perl
   - name: libjson-perl
   - name: libjson-xs-perl
+  - name: python3-icecream
   - name: python3.10-venv
   - name: python3-pip
   - name: python3-virtualenv
