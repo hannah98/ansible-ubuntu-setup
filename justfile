@@ -37,6 +37,11 @@ tags:
 run:
     {{PLAYBOOK}} -b run.yml {{VAULT_PW_ARGS}} {{ATAGS}}
 
+clis: cli
+
+cli:
+    {{PLAYBOOK}} -b run.yml {{VAULT_PW_ARGS}} --tags clis
+
 # Tags Example
 tagexample:
     @echo "just TAGS=clis,singlecli,cli=just test"
