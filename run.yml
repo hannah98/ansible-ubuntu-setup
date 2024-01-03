@@ -38,12 +38,9 @@
     - role: tmux
       tags:
         - tmux
-    #- role: github-release-binary
-      #tags:
-        #- cli
-        #- clis
-        #- never
-      #become_user: bhannah
+    - role: python
+      tags:
+        - python
     - role: gh-release-binary
       tags:
         - cli

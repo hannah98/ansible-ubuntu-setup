@@ -1,0 +1,11 @@
+---
+
+- name: Install python
+  apt: pkg="{{ item }}" state=present force=yes
+  with_items:
+    - python3
+    - python3-pip
+  become: true
+
+- name: Install pip3 packages
+  ansible.builtin.include_tasks: pip3.yml

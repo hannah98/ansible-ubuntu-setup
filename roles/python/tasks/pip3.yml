@@ -1,0 +1,29 @@
+---
+
+- name: update pip
+  pip: name="pip" state=latest executable=pip3
+  become: true
+
+- name: update pip
+  pip: name="pip" state=latest executable=pip3
+  become: false
+
+- name: Install python3 packages with pip3
+  pip:
+    name: "{{ item.name | default(item) }}"
+    version: "{{ item.version | default(omit) }}"
+    state: present
+    extra_args: "--no-cache-dir"
+    executable: pip3
+  with_items: "{{ pip3_packages | default([]) }}"
+  become: true
+
+- name: Install python3 packages with pip3
+  pip:
+    name: "{{ item.name | default(item) }}"
+    version: "{{ item.version | default(omit) }}"
+    state: present
+    extra_args: "--no-cache-dir"
+    executable: pip3
+  with_items: "{{ pip3_packages | default([]) }}"
+  become: false

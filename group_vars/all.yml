@@ -29,6 +29,11 @@ nvm_version: v0.39.3
 # hussainweb.chezmoi
 chezmoi_init_url: git@github.com:hannah98/dotfiles.git
 
+# pip3 packages
+pip3_packages:
+  - pipenv
+  - pre-commit
+
 # github-release-binary
 ghrb:
   # binary releases
