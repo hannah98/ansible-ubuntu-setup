@@ -15,7 +15,7 @@
 
 - name: Build bat cache
   become: false
-  ansible.builtin.shell: /usr/bin/batcat cache --build
+  ansible.builtin.shell: bat cache --build
   register: cache_output
   when: git_checkout.changed
 # - name: link bat to batcat
