@@ -6,6 +6,13 @@
     state: directory
     mode: 0755
 
+- name: ensure bat syntax dir exists
+  become: false
+  ansible.builtin.file:
+    path: "~/.config/bat/syntaxes"
+    state: directory
+    mode: 0755
+
 - name: Checkout bat solarized theme
   become: false
   ansible.builtin.git:
@@ -13,16 +20,19 @@
     dest: "~/.config/bat/themes"
   register: git_checkout
 
+- name: Add justfile support
+  git:
+    update: false
+    repo: https://github.com/nk9/just_sublime.git
+    dest: ~/.config/bat/syntaxes/just_sublime
+
+- name: Remove unneded sublime syntaxes
+  ansible.builtin.file:
+    path: ~/.config/bat/syntaxes/just_sublime/Syntax/Embeddings
+    state: absent
+
 - name: Build bat cache
   become: false
   ansible.builtin.shell: bat cache --build
   register: cache_output
   when: git_checkout.changed
-# - name: link bat to batcat
-#   ansible.builtin.file:
-#     src: /usr/bin/bat
-#     dest: /usr/bin/batcat
-#    owner: root
-#    group: root
-#    state: link
-#  become: true
